@@ -1,0 +1,5 @@
+[ 6275.518155] Hello, world
+[ 6402.890316] Goodbye, world
+[ 7364.915247] Hello, world
+[ 7376.363890] Goodbye, world
+[ 7543.067402] Hello, world

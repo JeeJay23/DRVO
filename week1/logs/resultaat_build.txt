@@ -1,0 +1,8 @@
+/usr/bin/make opdr_3_4.ko obj-m=opdr_3_4.o -C /lib/modules/5.15.0-91-generic/build M=/mnt/sharedFolder modules
+make[1]: Entering directory '/usr/src/linux-headers-5.15.0-91-generic'
+  CC [M]  /mnt/sharedFolder/opdr_3_4.o
+  MODPOST /mnt/sharedFolder/Module.symvers
+  CC [M]  /mnt/sharedFolder/opdr_3_4.mod.o
+  LD [M]  /mnt/sharedFolder/opdr_3_4.ko
+  BTF [M] /mnt/sharedFolder/opdr_3_4.ko
+make[1]: Leaving directory '/usr/src/linux-headers-5.15.0-91-generic'

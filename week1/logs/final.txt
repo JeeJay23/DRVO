@@ -1,0 +1,73 @@
+resultaat_build.txt:
+/usr/bin/make opdr_3_4.ko obj-m=opdr_3_4.o -C /lib/modules/5.15.0-91-generic/build M=/mnt/sharedFolder modules
+make[1]: Entering directory '/usr/src/linux-headers-5.15.0-91-generic'
+  CC [M]  /mnt/sharedFolder/opdr_3_4.o
+  MODPOST /mnt/sharedFolder/Module.symvers
+  CC [M]  /mnt/sharedFolder/opdr_3_4.mod.o
+  LD [M]  /mnt/sharedFolder/opdr_3_4.ko
+  BTF [M] /mnt/sharedFolder/opdr_3_4.ko
+make[1]: Leaving directory '/usr/src/linux-headers-5.15.0-91-generic'
+
+resultaat_cat_modules.txt:
+opgave_3_1 16384 0 - Live 0x0000000000000000 (OE)
+
+resultaat_driver_registration.txt:
+[29276.659373] registered device
+[29276.659380] Hello driver added successfully
+[29276.659380] Started driver with A: 0 and B: 0
+[29294.666183] Driver has been succesfully unregistered
+[31628.889843] registered device
+[31628.889852] Hello driver added successfully
+[31628.889854] Started driver with A: 0 and B: 0
+
+resultaat_insmod.txt:
+[ 6275.518155] Hello, world
+[ 6402.890316] Goodbye, world
+[ 7364.915247] Hello, world
+[ 7376.363890] Goodbye, world
+[ 7543.067402] Hello, world
+
+resultaat_lsmod.txt:
+opgave_3_1             16384  0
+
+resultaat_node_registration.txt:
+crw-rw-rw- 1 root jader 420, 0 Apr 21 15:34 /dev/opdr_3_4
+
+resultaat_opdr_3_3.txt:
+/usr/bin/make opdr_3_3.ko obj-m=opdr_3_3.o -C /lib/modules/5.15.0-91-generic/build M=/mnt/sharedFolder modules
+make[1]: Entering directory '/usr/src/linux-headers-5.15.0-91-generic'
+  CC [M]  /mnt/sharedFolder/opdr_3_3.o
+/mnt/sharedFolder/opdr_3_3.c:47:31: warning: ‘fops’ defined but not used [-Wunused-variable]
+   47 | static struct file_operations fops = {
+      |                               ^~~~
+  MODPOST /mnt/sharedFolder/Module.symvers
+  CC [M]  /mnt/sharedFolder/opdr_3_3.mod.o
+  LD [M]  /mnt/sharedFolder/opdr_3_3.ko
+  BTF [M] /mnt/sharedFolder/opdr_3_3.ko
+Skipping BTF generation for /mnt/sharedFolder/opdr_3_3.ko due to unavailability of vmlinux
+make[3]: *** No rule to make target 'opdr_3_3.mod', needed by '__build'.  Stop.
+make[2]: *** [Makefile:1909: /mnt/sharedFolder] Error 2
+make[1]: *** [Makefile:357: __build_one_by_one] Error 2
+make[1]: Leaving directory '/usr/src/linux-headers-5.15.0-91-generic'
+make: *** [Makefile:6: opdr_3_3.ko] Error 2
+
+
+resultaat_rmmod.txt:
+[ 6402.890316] Goodbye, world
+[ 7364.915247] Hello, world
+[ 7376.363890] Goodbye, world
+[ 7543.067402] Hello, world
+[ 7615.240396] Goodbye, world
+
+resultaat_test_script.sh:
+[29294.666183] Driver has been succesfully unregistered
+[31628.889843] registered device
+[31628.889852] Hello driver added successfully
+[31628.889854] Started driver with A: 0 and B: 0
+[32730.742653] Opened hello
+[32730.742666] read 131072 bytes
+[32730.742673] released hello
+[32730.743240] Opened hello
+[32730.743254] written 5 bytes
+[32730.743257] released hello
+

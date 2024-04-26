@@ -1,0 +1,1 @@
+crw-rw-rw- 1 root jader 420, 0 Apr 21 15:34 /dev/opdr_3_4

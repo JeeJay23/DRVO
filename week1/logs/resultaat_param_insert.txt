@@ -1,0 +1,5 @@
+sudo ./install_driver.sh opdr_3_4 intParamA=10 intParamB=20
+
+[35238.716062] registered device
+[35238.716069] Hello driver added successfully
+[35238.716070] Started driver with A: 10 and B: 20

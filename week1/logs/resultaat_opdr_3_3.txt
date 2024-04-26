@@ -1,0 +1,17 @@
+/usr/bin/make opdr_3_3.ko obj-m=opdr_3_3.o -C /lib/modules/5.15.0-91-generic/build M=/mnt/sharedFolder modules
+make[1]: Entering directory '/usr/src/linux-headers-5.15.0-91-generic'
+  CC [M]  /mnt/sharedFolder/opdr_3_3.o
+/mnt/sharedFolder/opdr_3_3.c:47:31: warning: ‘fops’ defined but not used [-Wunused-variable]
+   47 | static struct file_operations fops = {
+      |                               ^~~~
+  MODPOST /mnt/sharedFolder/Module.symvers
+  CC [M]  /mnt/sharedFolder/opdr_3_3.mod.o
+  LD [M]  /mnt/sharedFolder/opdr_3_3.ko
+  BTF [M] /mnt/sharedFolder/opdr_3_3.ko
+Skipping BTF generation for /mnt/sharedFolder/opdr_3_3.ko due to unavailability of vmlinux
+make[3]: *** No rule to make target 'opdr_3_3.mod', needed by '__build'.  Stop.
+make[2]: *** [Makefile:1909: /mnt/sharedFolder] Error 2
+make[1]: *** [Makefile:357: __build_one_by_one] Error 2
+make[1]: Leaving directory '/usr/src/linux-headers-5.15.0-91-generic'
+make: *** [Makefile:6: opdr_3_3.ko] Error 2
+

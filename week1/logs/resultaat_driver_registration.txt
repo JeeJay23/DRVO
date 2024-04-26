@@ -1,0 +1,7 @@
+[29276.659373] registered device
+[29276.659380] Hello driver added successfully
+[29276.659380] Started driver with A: 0 and B: 0
+[29294.666183] Driver has been succesfully unregistered
+[31628.889843] registered device
+[31628.889852] Hello driver added successfully
+[31628.889854] Started driver with A: 0 and B: 0
