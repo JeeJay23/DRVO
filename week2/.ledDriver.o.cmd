@@ -698,6 +698,16 @@ deps_/home/debian/src/DRVO/week2/ledDriver.o := \
     $(wildcard include/config/xen.h) \
     $(wildcard include/config/arch/omap.h) \
   include/linux/pm_wakeup.h \
+  include/linux/uaccess.h \
+  arch/arm/include/asm/uaccess.h \
+    $(wildcard include/config/cpu/sw/domain/pan.h) \
+    $(wildcard include/config/cpu/use/domains.h) \
+    $(wildcard include/config/uaccess/with/memcpy.h) \
+  arch/arm/include/asm/domain.h \
+    $(wildcard include/config/io/36.h) \
+    $(wildcard include/config/cpu/cp15/mmu.h) \
+  arch/arm/include/generated/asm/extable.h \
+  include/asm-generic/extable.h \
   arch/arm/include/asm/io.h \
     $(wildcard include/config/pci.h) \
     $(wildcard include/config/need/mach/io/h.h) \

@@ -3,9 +3,8 @@
 #include <linux/fs.h>
 #include <linux/cdev.h>
 #include <linux/kernel.h>
+#include <linux/uaccess.h>
 
-// #include <asm/system.h>
-// #include <asm-generic/iomap.h>
 #include <asm/io.h>
 
 MODULE_LICENSE("Dual BSD/GPL");
@@ -15,9 +14,11 @@ MODULE_LICENSE("Dual BSD/GPL");
 
 #define CM_GCM_AD9 0x44e10824
 #define CM_GCM_A3 0x44e1084c
+#define CM_GPMC_AD13 0x44e10834
 
-// #define PIN 13
-#define PIN 16
+// #define PIN 11
+#define PIN 13
+// #define PIN 16
 
 #define GPIO_OE 0x4d
 // #define GPIO_OE 0x134
@@ -36,6 +37,7 @@ static const int major  = 420;
 static const int minor = 0;
 
 static const int amount = 1;
+static char* msg = NULL;
 
 static const char driver_name[] = "Hello World Driver";
 
@@ -61,7 +63,7 @@ static int release(struct inode* node, struct file* fp)
 // ssize_t (*read) (struct file *, char __user *, size_t, loff_t *);
 static ssize_t read(struct file* fp, char __user* buffer, size_t size, loff_t* loff)
 {
-	uint32_t* gpio = ioremap(GPIO1_ADDR, 0x198);
+	uint32_t* gpio = ioremap(GPIO1_ADDR, GPIO_MAX);
 	barrier();
 
 	iowrite32((1<<PIN), gpio + GPIO_CLEARDATAOUT); wmb();
@@ -75,11 +77,22 @@ static ssize_t read(struct file* fp, char __user* buffer, size_t size, loff_t* l
 // ssize_t (*write) (struct file *, const char __user *, size_t, loff_t *);
 static ssize_t write(struct file* fp, const char __user* buffer, size_t size, loff_t* loff)
 {
-	// for now, make write set the led on
-	uint32_t* gpio = ioremap(GPIO1_ADDR, 0x198);
-	barrier();
+	uint32_t* gpio = ioremap(GPIO1_ADDR, GPIO_MAX);
+    barrier();
+    iowrite32((1 << PIN), gpio + GPIO_SETDATAOUT); wmb();
 
-	iowrite32((1<<PIN), gpio + GPIO_SETDATAOUT); wmb();
+    // memset(msg, 0, 32);
+
+    // int count = copy_from_user(msg, buffer, size);
+	// // for now, make write set the led on
+	// barrier();
+
+    // if (msg[0] == '1'){
+    //     iowrite32((1 << PIN), gpio + GPIO_SETDATAOUT);
+    // }
+    // else{
+    //     iowrite32((1 << PIN), gpio + GPIO_CLEARDATAOUT);
+    // }
 
 	iounmap(gpio);
 
@@ -118,27 +131,20 @@ static int hello_init(void)
 		return 0;
 	}
 
-	// remap IO
-	uint32_t* cm = ioremap(CM_GCM_A3, sizeof(uint32_t*));
+	uint32_t* cm = ioremap(CM_GPMC_AD13, sizeof(uint32_t*));
 	uint32_t* gpio = ioremap(GPIO1_ADDR, GPIO_MAX * sizeof(uint32_t));
-
-	if (cm == NULL) return 0;
-	if (gpio == NULL) return 0;
-
-	uint32_t oe;
 
 	barrier();
 
 	// set mux to gpio mode
-	uint32_t val = ioread32(cm); rmb();
-	val &= (~0x7);
-	val |= 0x7;
-	iowrite32(val, cm); wmb();
+	// uint32_t val = ioread32(cm); rmb();
+	// val &= (~0x7);
+	// val |= 0x7;
+	// iowrite32(val, cm); wmb();
 	
-	// set pin 13 as output pin
-	oe = ioread32(gpio + GPIO_OE); rmb();
-	oe &= ~(1<<PIN);
-	iowrite32(oe, gpio); wmb();
+	// set pin as output pin
+	uint32_t oe = ioread32(gpio + GPIO_OE); rmb();
+	iowrite32((oe & (~(1<<PIN))), gpio + GPIO_OE); wmb();
 
 	iounmap(cm);
 	iounmap(gpio);
