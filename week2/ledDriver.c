@@ -15,9 +15,11 @@ MODULE_LICENSE("Dual BSD/GPL");
 #define CM_GCM_AD9 0x44e10824
 #define CM_GCM_A3 0x44e1084c
 #define CM_GPMC_AD13 0x44e10834
+#define CM_GPMC_A2 0x44e10848
 
 // #define PIN 11
-#define PIN 13
+// #define PIN 13
+#define PIN 18
 // #define PIN 16
 
 #define GPIO_OE 0x4d
@@ -131,16 +133,16 @@ static int hello_init(void)
 		return 0;
 	}
 
-	uint32_t* cm = ioremap(CM_GPMC_AD13, sizeof(uint32_t*));
+	uint32_t* cm = ioremap(CM_GPMC_A2, sizeof(uint32_t*));
 	uint32_t* gpio = ioremap(GPIO1_ADDR, GPIO_MAX * sizeof(uint32_t));
 
 	barrier();
 
 	// set mux to gpio mode
-	// uint32_t val = ioread32(cm); rmb();
-	// val &= (~0x7);
-	// val |= 0x7;
-	// iowrite32(val, cm); wmb();
+	uint32_t val = ioread32(cm); rmb();
+	val &= (~0x7);
+	val |= 0x7;
+	iowrite32(val, cm); wmb();
 	
 	// set pin as output pin
 	uint32_t oe = ioread32(gpio + GPIO_OE); rmb();
